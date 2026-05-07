@@ -1,4 +1,4 @@
-TaskFlow Dashboard is a responsive SaaS-style task management application shell built with Next.js App Router, TypeScript, and Tailwind CSS.
+TaskFlow Dashboard is a responsive SaaS-style task management application built with Next.js App Router, TypeScript, and Tailwind CSS. It includes fully interactive client-side task workflows powered by local React state and typed mock data.
 
 ## Getting Started
 
@@ -16,7 +16,7 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-The current shell includes a desktop sidebar, sticky top navbar, mobile drawer navigation, reusable layout/dashboard components under `src/components`, and typed mock task data that powers the dashboard overview.
+The current app includes a desktop sidebar, sticky top navbar, mobile drawer navigation, reusable layout/dashboard/task components under `src/components`, and typed mock task data that initializes a fully local task workspace.
 
 ## Architecture
 
@@ -26,11 +26,13 @@ src/
   components/
     dashboard/          # Dashboard-specific presentation components
     layout/             # Reusable application shell components
+    tasks/              # Interactive task workflow components
     ui/                 # Small shared UI primitives
   constants/            # Navigation, task status, and priority metadata
+  hooks/                # Client-side state management hooks
   services/             # Mock data access layer ready for future API/database integration
   types/                # Shared TypeScript types
-  utils/                # Task metrics and sorting helpers
+  utils/                # Task metrics, filtering, formatting, and sorting helpers
 ```
 
 ## Implemented Features
@@ -40,9 +42,11 @@ src/
 - Sticky top navbar with search and account controls
 - Mobile drawer menu for small screens
 - Reusable TypeScript components styled with Tailwind CSS
+- Fully client-side task creation, editing, deletion, and status updates
+- Search and filters for task content, status, and priority
 - Typed task data model with status, priority, assignee, tags, due dates, and timestamps
 - Initial mock task dataset exposed through a service layer
-- Dashboard metrics derived from mock task data
+- Dashboard metrics derived from live local task state
 
 ## Learn More
 
