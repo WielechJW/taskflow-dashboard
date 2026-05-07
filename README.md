@@ -16,7 +16,7 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-The current shell includes a desktop sidebar, sticky top navbar, mobile drawer navigation, and reusable layout/dashboard components under `src/components`.
+The current shell includes a desktop sidebar, sticky top navbar, mobile drawer navigation, reusable layout/dashboard components under `src/components`, and typed mock task data that powers the dashboard overview.
 
 ## Architecture
 
@@ -27,8 +27,10 @@ src/
     dashboard/          # Dashboard-specific presentation components
     layout/             # Reusable application shell components
     ui/                 # Small shared UI primitives
-  constants/            # Navigation and app constants
+  constants/            # Navigation, task status, and priority metadata
+  services/             # Mock data access layer ready for future API/database integration
   types/                # Shared TypeScript types
+  utils/                # Task metrics and sorting helpers
 ```
 
 ## Implemented Features
@@ -38,6 +40,9 @@ src/
 - Sticky top navbar with search and account controls
 - Mobile drawer menu for small screens
 - Reusable TypeScript components styled with Tailwind CSS
+- Typed task data model with status, priority, assignee, tags, due dates, and timestamps
+- Initial mock task dataset exposed through a service layer
+- Dashboard metrics derived from mock task data
 
 ## Learn More
 
