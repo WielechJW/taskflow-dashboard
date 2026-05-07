@@ -1,30 +1,48 @@
 import { StatCard } from "@/components/dashboard/StatCard";
+import { getInitialTasks } from "@/services/taskService";
+import type { Task } from "@/types/task";
+import { getFocusTasks, getTaskMetrics } from "@/utils/taskMetrics";
 
-const stats = [
-  {
-    label: "Active tasks",
-    value: "24",
-    helper: "6 high-priority tasks need attention today.",
-    icon: "checkCircle",
-    tone: "blue",
-  },
-  {
-    label: "On-time rate",
-    value: "92%",
-    helper: "Up 8% compared with last sprint delivery.",
-    icon: "analytics",
-    tone: "emerald",
-  },
-  {
-    label: "Due this week",
-    value: "11",
-    helper: "Planning, review, and QA tasks are queued.",
-    icon: "calendar",
-    tone: "orange",
-  },
-] as const;
+function formatDueLabel(task: Task): string {
+  if (!task.dueDate) {
+    return "No due date";
+  }
+
+  return new Intl.DateTimeFormat("en", {
+    month: "short",
+    day: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(`${task.dueDate}T00:00:00.000Z`));
+}
 
 export function DashboardOverview() {
+  const tasks = getInitialTasks();
+  const metrics = getTaskMetrics(tasks);
+  const focusTasks = getFocusTasks(tasks);
+  const stats = [
+    {
+      label: "Active tasks",
+      value: String(metrics.activeTaskCount),
+      helper: `${metrics.highPriorityActiveCount} high-priority tasks need attention this week.`,
+      icon: "checkCircle",
+      tone: "blue",
+    },
+    {
+      label: "On-time rate",
+      value: `${metrics.onTimeRate}%`,
+      helper: `${metrics.completedTaskCount} completed item supports delivery tracking.`,
+      icon: "analytics",
+      tone: "emerald",
+    },
+    {
+      label: "Due this week",
+      value: String(metrics.dueThisWeekCount),
+      helper: "Planning, review, and QA tasks are queued from mock task data.",
+      icon: "calendar",
+      tone: "orange",
+    },
+  ] as const;
+
   return (
     <section aria-labelledby="dashboard-overview-title" className="space-y-6">
       <div className="rounded-[2rem] bg-slate-950 p-6 text-white shadow-2xl shadow-slate-300/70 sm:p-8">
@@ -59,23 +77,24 @@ export function DashboardOverview() {
               <p className="text-sm text-slate-500">High-impact tasks for the team.</p>
             </div>
             <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700">
-              3 on track
+              {focusTasks.length} on track
             </span>
           </div>
 
           <div className="mt-6 space-y-3">
-            {[
-              "Finalize launch checklist",
-              "Review dashboard analytics copy",
-              "Triage priority customer feedback",
-            ].map((task) => (
+            {focusTasks.map((task) => (
               <div
-                key={task}
+                key={task.id}
                 className="flex items-center justify-between gap-4 rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3"
               >
-                <p className="font-semibold text-slate-700">{task}</p>
-                <span className="rounded-full bg-white px-3 py-1 text-xs font-bold text-slate-500">
-                  Today
+                <div>
+                  <p className="font-semibold text-slate-700">{task.title}</p>
+                  <p className="mt-1 text-xs font-medium uppercase tracking-wide text-slate-400">
+                    {task.project} · {task.priority} priority
+                  </p>
+                </div>
+                <span className="shrink-0 rounded-full bg-white px-3 py-1 text-xs font-bold text-slate-500">
+                  {formatDueLabel(task)}
                 </span>
               </div>
             ))}
