@@ -35,3 +35,24 @@ export type TaskPriorityOption = {
   readonly description: string;
   readonly rank: number;
 };
+
+export type TaskFormValues = {
+  readonly title: string;
+  readonly description: string;
+  readonly status: TaskStatus;
+  readonly priority: TaskPriority;
+  readonly project: string;
+  readonly assigneeName: string;
+  readonly tags: readonly string[];
+  readonly dueDate: string | null;
+};
+
+export type TaskStatusFilter = TaskStatus | "all" | "open";
+
+export type TaskPriorityFilter = TaskPriority | "all";
+
+export type TaskFilters = {
+  readonly searchQuery: string;
+  readonly status: TaskStatusFilter;
+  readonly priority: TaskPriorityFilter;
+};
