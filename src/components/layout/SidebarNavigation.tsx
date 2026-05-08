@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { primaryNavigation, secondaryNavigation } from "@/constants/navigation";
 import type { NavigationItem } from "@/types/navigation";
 import { Icon } from "@/components/ui/Icon";
@@ -7,8 +10,20 @@ type SidebarNavigationProps = {
   readonly onNavigate?: () => void;
 };
 
-function NavigationLink({ item, onNavigate }: { readonly item: NavigationItem; readonly onNavigate?: () => void }) {
-  const isActive = item.href === "/";
+function isNavigationItemActive(itemHref: string, pathname: string): boolean {
+  return itemHref === "/" ? pathname === itemHref : pathname.startsWith(itemHref);
+}
+
+function NavigationLink({
+  item,
+  pathname,
+  onNavigate,
+}: {
+  readonly item: NavigationItem;
+  readonly pathname: string;
+  readonly onNavigate?: () => void;
+}) {
+  const isActive = isNavigationItemActive(item.href, pathname);
 
   return (
     <Link
@@ -31,17 +46,19 @@ function NavigationLink({ item, onNavigate }: { readonly item: NavigationItem; r
 }
 
 export function SidebarNavigation({ onNavigate }: SidebarNavigationProps) {
+  const pathname = usePathname();
+
   return (
     <nav aria-label="Primary navigation" className="flex flex-1 flex-col gap-8">
       <div className="space-y-2">
         {primaryNavigation.map((item) => (
-          <NavigationLink key={item.href} item={item} onNavigate={onNavigate} />
+          <NavigationLink key={item.href} item={item} pathname={pathname} onNavigate={onNavigate} />
         ))}
       </div>
 
       <div className="mt-auto space-y-2 border-t border-slate-200 pt-6">
         {secondaryNavigation.map((item) => (
-          <NavigationLink key={item.href} item={item} onNavigate={onNavigate} />
+          <NavigationLink key={item.href} item={item} pathname={pathname} onNavigate={onNavigate} />
         ))}
       </div>
     </nav>

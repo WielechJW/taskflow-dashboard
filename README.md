@@ -16,7 +16,7 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-The current app includes a desktop sidebar, sticky top navbar, mobile drawer navigation, reusable layout/dashboard/task components under `src/components`, and typed mock task data that initializes a fully local task workspace.
+The current app includes a desktop sidebar, sticky top navbar, mobile drawer navigation, reusable layout/dashboard/task components under `src/components`, and typed mock task data. The dashboard lives at `/`, while `/tasks` hosts a fully local task workspace for creating and managing tasks.
 
 ## Architecture
 
@@ -42,11 +42,11 @@ src/
 - Sticky top navbar with search and account controls
 - Mobile drawer menu for small screens
 - Reusable TypeScript components styled with Tailwind CSS
-- Fully client-side task creation, editing, deletion, and status updates
+- Dedicated `/tasks` page for fully client-side task creation, editing, deletion, and status updates
 - Search and filters for task content, status, and priority
 - Typed task data model with status, priority, assignee, tags, due dates, and timestamps
 - Initial mock task dataset exposed through a service layer
-- Dashboard metrics derived from live local task state
+- Dashboard overview at `/` with task metrics and focus work derived from typed mock data
 
 ## Learn More
 
