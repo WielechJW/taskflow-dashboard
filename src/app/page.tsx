@@ -1,6 +1,5 @@
-import { TaskWorkspace } from "@/components/tasks/TaskWorkspace";
-import { getInitialTasks } from "@/services/taskService";
+import { DashboardOverview } from "@/components/dashboard/DashboardOverview";
 
 export default function Home() {
-  return <TaskWorkspace initialTasks={getInitialTasks()} />;
+  return <DashboardOverview />;
 }
