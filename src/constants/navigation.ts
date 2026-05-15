@@ -4,7 +4,7 @@ export const primaryNavigation: readonly NavigationItem[] = [
   { label: "Dashboard", href: "/", icon: "grid" },
   { label: "Tasks", href: "/tasks", icon: "checkCircle" },
   { label: "Calendar", href: "/calendar", icon: "calendar" },
-  { label: "Team", href: "/team", icon: "users" },
+  { label: "Teams", href: "/teams", icon: "users" },
   { label: "Analytics", href: "/analytics", icon: "analytics" },
 ];
 

@@ -12,6 +12,7 @@ export type IconName =
   | "grid"
   | "menu"
   | "search"
+  | "send"
   | "settings"
   | "sparkles"
   | "users"

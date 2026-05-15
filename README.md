@@ -16,7 +16,7 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-The current app includes a desktop sidebar, sticky top navbar, mobile drawer navigation, reusable layout/dashboard/task components under `src/components`, and typed mock task data. The dashboard lives at `/`, while `/tasks` hosts a fully local task workspace for creating and managing tasks.
+The current app includes a desktop sidebar, sticky top navbar, mobile drawer navigation, reusable layout/dashboard/task/team components under `src/components`, and typed mock data. The dashboard lives at `/`, `/tasks` hosts a fully local task workspace for creating and managing tasks, `/calendar` visualizes deadlines, and `/teams` provides a local team chat experience.
 
 ## Architecture
 
@@ -27,6 +27,7 @@ src/
     dashboard/          # Dashboard-specific presentation components
     layout/             # Reusable application shell components
     tasks/              # Interactive task workflow components
+    team/               # Team chat workspace components
     ui/                 # Small shared UI primitives
   constants/            # Navigation, task status, and priority metadata
   hooks/                # Client-side state management hooks
@@ -47,6 +48,8 @@ src/
 - Typed task data model with status, priority, assignee, tags, due dates, and timestamps
 - Initial mock task dataset exposed through a service layer
 - Dashboard overview at `/` with task metrics and focus work derived from typed mock data
+- Calendar planning page at `/calendar` for task deadlines and upcoming work
+- Teams chat page at `/teams` with local message sending and member presence cards
 
 ## Learn More
 
