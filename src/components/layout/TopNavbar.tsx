@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Icon } from "@/components/ui/Icon";
 
 type TopNavbarProps = {
@@ -34,12 +35,19 @@ export function TopNavbar({ onOpenMenu }: TopNavbarProps) {
           />
         </label>
 
-        <button
-          className="hidden rounded-2xl bg-slate-950 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-slate-300/70 transition hover:-translate-y-0.5 hover:bg-slate-800 sm:inline-flex"
-          type="button"
+        <Link
+          className="hidden rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-bold text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:text-slate-950 md:inline-flex"
+          href="/login"
         >
-          New task
-        </button>
+          Log in
+        </Link>
+
+        <Link
+          className="hidden rounded-2xl bg-slate-950 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-slate-300/70 transition hover:-translate-y-0.5 hover:bg-slate-800 sm:inline-flex"
+          href="/register"
+        >
+          Sign up
+        </Link>
 
         <button
           aria-label="Open account menu"
