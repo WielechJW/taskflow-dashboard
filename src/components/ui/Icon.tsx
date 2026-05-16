@@ -36,6 +36,18 @@ const iconPaths: Record<IconName, React.ReactNode> = {
       <rect width="7" height="7" x="3" y="14" rx="1" />
     </>
   ),
+  lock: (
+    <>
+      <rect width="18" height="11" x="3" y="11" rx="2" />
+      <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+    </>
+  ),
+  mail: (
+    <>
+      <rect width="20" height="16" x="2" y="4" rx="2" />
+      <path d="m22 7-8.97 5.7a2 2 0 0 1-2.06 0L2 7" />
+    </>
+  ),
   menu: (
     <>
       <path d="M4 6h16" />
@@ -68,6 +80,12 @@ const iconPaths: Record<IconName, React.ReactNode> = {
       <path d="M3 5h4" />
       <path d="M19 17v4" />
       <path d="M17 19h4" />
+    </>
+  ),
+  user: (
+    <>
+      <path d="M20 21a8 8 0 0 0-16 0" />
+      <circle cx="12" cy="7" r="4" />
     </>
   ),
   users: (

@@ -10,10 +10,13 @@ export type IconName =
   | "checkCircle"
   | "chevronDown"
   | "grid"
+  | "lock"
+  | "mail"
   | "menu"
   | "search"
   | "send"
   | "settings"
   | "sparkles"
+  | "user"
   | "users"
   | "x";

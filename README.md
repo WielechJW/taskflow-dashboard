@@ -16,7 +16,7 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-The current app includes a desktop sidebar, sticky top navbar, mobile drawer navigation, reusable layout/dashboard/task/team components under `src/components`, and typed mock data. The dashboard lives at `/`, `/tasks` hosts a fully local task workspace for creating and managing tasks, `/calendar` visualizes deadlines, and `/teams` provides a local team chat experience.
+The current app includes a desktop sidebar, sticky top navbar, mobile drawer navigation, dedicated authentication screens, reusable layout/dashboard/task/team/auth components under `src/components`, and typed mock data. The dashboard lives at `/`, `/tasks` hosts a fully local task workspace for creating and managing tasks, `/calendar` visualizes deadlines, `/teams` provides a local team chat experience, and `/login` plus `/register` provide polished authentication entry points.
 
 ## Architecture
 
@@ -24,6 +24,7 @@ The current app includes a desktop sidebar, sticky top navbar, mobile drawer nav
 src/
   app/                  # App Router root layout and pages
   components/
+    auth/               # Shared login and registration screen components
     dashboard/          # Dashboard-specific presentation components
     layout/             # Reusable application shell components
     tasks/              # Interactive task workflow components
@@ -50,6 +51,7 @@ src/
 - Dashboard overview at `/` with task metrics and focus work derived from typed mock data
 - Calendar planning page at `/calendar` for task deadlines and upcoming work
 - Teams chat page at `/teams` with local message sending and member presence cards
+- Authentication entry screens at `/login` and `/register` with responsive forms and shared auth layout
 
 ## Learn More
 

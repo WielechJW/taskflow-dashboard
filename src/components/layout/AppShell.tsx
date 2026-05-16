@@ -2,6 +2,7 @@
 
 import type React from "react";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { MobileDrawer } from "@/components/layout/MobileDrawer";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { TopNavbar } from "@/components/layout/TopNavbar";
@@ -10,8 +11,15 @@ type AppShellProps = {
   readonly children: React.ReactNode;
 };
 
+const authRoutes = new Set(["/login", "/register"]);
+
 export function AppShell({ children }: AppShellProps) {
+  const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  if (authRoutes.has(pathname)) {
+    return children;
+  }
 
   return (
     <div className="min-h-screen bg-slate-100 text-slate-950">
