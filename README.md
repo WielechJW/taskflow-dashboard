@@ -1,69 +1,73 @@
-TaskFlow Dashboard is a responsive SaaS-style task management application built with Next.js App Router, TypeScript, and Tailwind CSS. It includes fully interactive client-side task workflows powered by local React state and typed mock data.
+# TaskFlow Dashboard
 
-## Getting Started
+A responsive SaaS-style task management interface built with Next.js, React, and TypeScript. The project demonstrates reusable UI architecture, typed domain models, derived analytics, and interactive client-side workflows across desktop and mobile layouts.
 
-First, run the development server:
+> Portfolio project: data and authentication flows are intentionally simulated in the browser. There is no production backend or persistent database yet.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Highlights
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Create, edit, delete, filter, and update the status of tasks
+- Dashboard metrics calculated from typed task data
+- Calendar view for deadlines and upcoming work
+- Team workspace with a local chat interaction and presence cards
+- Responsive application shell with desktop sidebar and mobile drawer
+- Shared authentication layouts for login and registration screens
+- Static pages generated with the Next.js App Router
 
-The current app includes a desktop sidebar, sticky top navbar, mobile drawer navigation, dedicated authentication screens, reusable layout/dashboard/task/team/auth components under `src/components`, and typed mock data. The dashboard lives at `/`, `/tasks` hosts a fully local task workspace for creating and managing tasks, `/calendar` visualizes deadlines, `/teams` provides a local team chat experience, and `/login` plus `/register` provide polished authentication entry points.
+## Tech stack
+
+- Next.js 16 (App Router)
+- React 19
+- TypeScript
+- Tailwind CSS 4
+- ESLint
+
+## Routes
+
+| Route | Purpose |
+| --- | --- |
+| `/` | Dashboard overview and task metrics |
+| `/tasks` | Interactive task workspace |
+| `/calendar` | Deadline and planning view |
+| `/analytics` | Sprint KPI and status distribution view |
+| `/teams` | Team members and local chat experience |
+| `/login`, `/register` | Authentication UI examples |
 
 ## Architecture
 
 ```text
 src/
-  app/                  # App Router root layout and pages
-  components/
-    auth/               # Shared login and registration screen components
-    dashboard/          # Dashboard-specific presentation components
-    layout/             # Reusable application shell components
-    tasks/              # Interactive task workflow components
-    team/               # Team chat workspace components
-    ui/                 # Small shared UI primitives
-  constants/            # Navigation, task status, and priority metadata
-  hooks/                # Client-side state management hooks
-  services/             # Mock data access layer ready for future API/database integration
-  types/                # Shared TypeScript types
-  utils/                # Task metrics, filtering, formatting, and sorting helpers
+  app/          # App Router pages and root layout
+  components/   # Feature and shared UI components
+  constants/    # Navigation and task metadata
+  hooks/        # Client-side task state management
+  services/     # Typed mock-data access layer
+  types/        # Shared TypeScript domain types
+  utils/        # Filtering, formatting, calendar, and metrics logic
 ```
 
-## Implemented Features
+The feature-based component structure keeps presentation separate from task state and data helpers. `useTaskManager` owns local task operations, while utilities handle filtering and derived metrics without coupling them to the UI.
 
-- Responsive SaaS application shell
-- Persistent desktop sidebar navigation
-- Sticky top navbar with search and account controls
-- Mobile drawer menu for small screens
-- Reusable TypeScript components styled with Tailwind CSS
-- Dedicated `/tasks` page for fully client-side task creation, editing, deletion, and status updates
-- Search and filters for task content, status, and priority
-- Typed task data model with status, priority, assignee, tags, due dates, and timestamps
-- Initial mock task dataset exposed through a service layer
-- Dashboard overview at `/` with task metrics and focus work derived from typed mock data
-- Calendar planning page at `/calendar` for task deadlines and upcoming work
-- Teams chat page at `/teams` with local message sending and member presence cards
-- Authentication entry screens at `/login` and `/register` with responsive forms and shared auth layout
+## Run locally
 
-## Learn More
+Requirements: Node.js 20+ and npm.
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+git clone https://github.com/WielechJW/taskflow-dashboard.git
+cd taskflow-dashboard
+npm install
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+For a production check:
 
-## Deploy on Vercel
+```bash
+npm run build
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Current scope
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+TaskFlow is a frontend demonstration. State resets after a page refresh, the authentication screens do not create real sessions, and the service layer currently returns mock data. These boundaries are explicit so the repository accurately represents what is implemented today.
+
