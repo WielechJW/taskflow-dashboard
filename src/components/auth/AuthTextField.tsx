@@ -24,14 +24,15 @@ export function AuthTextField({
 }: AuthTextFieldProps) {
   return (
     <div>
-      <label className="text-sm font-bold text-slate-700" htmlFor={id}>
+      <label className="font-mono text-xs font-bold text-ink" htmlFor={id}>
         {label}
       </label>
-      <div className="mt-2 flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm transition focus-within:border-indigo-400 focus-within:ring-4 focus-within:ring-indigo-100">
-        <Icon name={icon} className="h-5 w-5 text-slate-400" />
+      <div className="mt-2 flex items-center gap-3 rounded-[3px] border border-ink bg-white px-3 py-3 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-ink">
+        <Icon name={icon} className="h-4 w-4 shrink-0 text-muted" />
         <input
+          aria-describedby={helpText ? `${id}-help` : undefined}
           autoComplete={autoComplete}
-          className="min-w-0 flex-1 bg-transparent text-sm font-semibold text-slate-900 outline-none placeholder:text-slate-400"
+          className="min-w-0 flex-1 bg-transparent text-sm text-ink outline-none placeholder:text-muted"
           id={id}
           name={name}
           placeholder={placeholder}
@@ -39,7 +40,7 @@ export function AuthTextField({
           type={type}
         />
       </div>
-      {helpText ? <p className="mt-2 text-xs font-medium text-slate-500">{helpText}</p> : null}
+      {helpText ? <p className="mt-2 text-xs leading-5 text-muted" id={`${id}-help`}>{helpText}</p> : null}
     </div>
   );
 }

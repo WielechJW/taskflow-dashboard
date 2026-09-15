@@ -22,7 +22,10 @@ export function AppShell({ children }: AppShellProps) {
   }
 
   return (
-    <div className="min-h-screen bg-slate-100 text-slate-950">
+    <div className="min-h-screen bg-white text-ink">
+      <a href="#main-content" className="retro-button fixed left-4 top-4 z-[60] -translate-y-24 focus:translate-y-0">
+        Skip to content
+      </a>
       <div className="flex min-h-screen">
         <Sidebar />
         <MobileDrawer
@@ -32,7 +35,13 @@ export function AppShell({ children }: AppShellProps) {
 
         <div className="flex min-w-0 flex-1 flex-col">
           <TopNavbar onOpenMenu={() => setIsMobileMenuOpen(true)} />
-          <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8">{children}</main>
+          <main id="main-content" tabIndex={-1} className="mx-auto w-full max-w-[1440px] flex-1 px-5 py-8 sm:px-8 lg:px-10 lg:py-10">
+            {children}
+          </main>
+          <footer className="mx-5 flex flex-wrap items-center justify-between gap-2 border-t border-ink py-4 font-mono text-[10px] uppercase tracking-widest text-muted sm:mx-8 lg:mx-10">
+            <span>TaskFlow / A little order, every day.</span>
+            <span>Make room for good work.</span>
+          </footer>
         </div>
       </div>
     </div>

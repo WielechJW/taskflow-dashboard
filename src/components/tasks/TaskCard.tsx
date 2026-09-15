@@ -20,7 +20,8 @@ export function TaskCard({ task, onDelete, onUpdate, onStatusChange }: TaskCardP
 
   if (isEditing) {
     return (
-      <article className="rounded-3xl border border-indigo-100 bg-indigo-50/60 p-5 shadow-sm shadow-indigo-100">
+      <article className="retro-panel p-5">
+        <p className="retro-eyebrow mb-4">Edit task</p>
         <TaskForm
           task={task}
           submitLabel="Save task"
@@ -35,27 +36,27 @@ export function TaskCard({ task, onDelete, onUpdate, onStatusChange }: TaskCardP
   }
 
   return (
-    <article className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70 transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-slate-200">
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+    <article className="retro-panel p-5">
+      <div className="flex flex-col gap-5">
         <div className="min-w-0 space-y-3">
           <div className="flex flex-wrap items-center gap-2">
-            <span className={`rounded-full px-3 py-1 text-xs font-bold ring-1 ${getStatusTone(task.status)}`}>
+            <span className={`retro-badge ${getStatusTone(task.status)}`}>
               {getStatusLabel(task.status)}
             </span>
-            <span className={`rounded-full px-3 py-1 text-xs font-bold capitalize ${getPriorityTone(task.priority)}`}>
+            <span className={`retro-badge ${getPriorityTone(task.priority)}`}>
               {task.priority} priority
             </span>
-            <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-500">
+            <span className="font-mono text-[11px] text-muted">
               Due {formatDateLabel(task.dueDate)}
             </span>
           </div>
 
           <div>
-            <h3 className="text-lg font-bold text-slate-950">{task.title}</h3>
-            <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-500">{task.description}</p>
+            <h3 className="text-base font-semibold text-ink [overflow-wrap:anywhere]">{task.title}</h3>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-muted [overflow-wrap:anywhere]">{task.description}</p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2 text-xs font-bold uppercase tracking-wide text-slate-400">
+          <div className="flex flex-wrap items-center gap-2 font-mono text-[11px] text-muted [overflow-wrap:anywhere]">
             <span>{task.project}</span>
             <span aria-hidden="true">•</span>
             <span>{task.assignee.name}</span>
@@ -63,14 +64,14 @@ export function TaskCard({ task, onDelete, onUpdate, onStatusChange }: TaskCardP
 
           <div className="flex flex-wrap gap-2">
             {task.tags.map((tag) => (
-              <span key={tag} className="rounded-full bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-500 ring-1 ring-slate-100">
+              <span key={tag} className="font-mono text-[11px] text-muted [overflow-wrap:anywhere]">
                 #{tag}
               </span>
             ))}
           </div>
         </div>
 
-        <div className="flex shrink-0 flex-col gap-3 sm:flex-row lg:flex-col">
+        <div className="flex flex-wrap items-center gap-3 border-t border-line pt-4">
           <label className="sr-only" htmlFor={`${task.id}-status`}>
             Update status for {task.title}
           </label>
@@ -78,7 +79,7 @@ export function TaskCard({ task, onDelete, onUpdate, onStatusChange }: TaskCardP
             id={`${task.id}-status`}
             value={task.status}
             onChange={(event) => onStatusChange(task.id, event.target.value as TaskStatus)}
-            className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 outline-none transition focus:border-indigo-400 focus:bg-white focus:ring-4 focus:ring-indigo-100"
+            className="retro-input w-full sm:w-auto"
           >
             {TASK_STATUS_OPTIONS.map((status) => (
               <option key={status.value} value={status.value}>
@@ -87,10 +88,10 @@ export function TaskCard({ task, onDelete, onUpdate, onStatusChange }: TaskCardP
             ))}
           </select>
 
-          <button type="button" onClick={() => setIsEditing(true)} className="rounded-2xl border border-slate-200 px-4 py-3 text-sm font-bold text-slate-600 transition hover:bg-slate-50">
+          <button type="button" onClick={() => setIsEditing(true)} className="retro-button retro-button-secondary">
             Edit
           </button>
-          <button type="button" onClick={() => onDelete(task.id)} className="rounded-2xl bg-rose-50 px-4 py-3 text-sm font-bold text-rose-700 transition hover:bg-rose-100">
+          <button type="button" onClick={() => onDelete(task.id)} className="min-h-11 px-2 font-mono text-xs text-muted underline decoration-dotted underline-offset-4 transition hover:text-ink sm:ml-auto">
             Delete
           </button>
         </div>

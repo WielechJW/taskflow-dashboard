@@ -7,7 +7,6 @@ type StatusMetric = {
   readonly label: string;
   readonly count: number;
   readonly percentage: number;
-  readonly toneClassName: string;
 };
 
 const STATUS_LABELS: Record<TaskStatus, string> = {
@@ -15,13 +14,6 @@ const STATUS_LABELS: Record<TaskStatus, string> = {
   "in-progress": "In progress",
   review: "In review",
   done: "Done",
-};
-
-const STATUS_TONES: Record<TaskStatus, string> = {
-  todo: "bg-slate-500",
-  "in-progress": "bg-blue-500",
-  review: "bg-amber-500",
-  done: "bg-emerald-500",
 };
 
 function getStatusMetrics(): readonly StatusMetric[] {
@@ -49,7 +41,6 @@ function getStatusMetrics(): readonly StatusMetric[] {
       label: STATUS_LABELS[status],
       count,
       percentage: totalTaskCount === 0 ? 0 : Math.round((count / totalTaskCount) * 100),
-      toneClassName: STATUS_TONES[status],
     };
   });
 }
@@ -59,58 +50,58 @@ export function AnalyticsOverview() {
   const metrics = getTaskMetrics(tasks);
   const statusMetrics = getStatusMetrics();
   const completionRate = tasks.length === 0 ? 0 : Math.round((metrics.completedTaskCount / tasks.length) * 100);
+  const summaryMetrics = [
+    { label: "Total tasks", value: tasks.length, detail: "In your workspace" },
+    { label: "Completion rate", value: `${completionRate}%`, detail: "Tasks marked as done" },
+    { label: "Due this week", value: metrics.dueThisWeekCount, detail: "Keep an eye on deadlines" },
+    { label: "High priority active", value: metrics.highPriorityActiveCount, detail: "First things first" },
+  ] as const;
 
   return (
     <section aria-labelledby="analytics-title" className="space-y-6">
-      <div className="overflow-hidden rounded-[2rem] bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-900 p-6 text-white shadow-2xl shadow-slate-300/60 sm:p-8">
-        <p className="text-sm font-bold uppercase tracking-[0.24em] text-indigo-200">Analytics</p>
-        <h1 id="analytics-title" className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
-          Przykładowy widok analityki dla zespołu TaskFlow.
+      <div className="border-b border-ink pb-6">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <p className="retro-eyebrow">Workspace / Analytics</p>
+          <span className="retro-badge">Mock data</span>
+        </div>
+        <h1 id="analytics-title" className="retro-title mt-4">
+          Praca w liczbach.
         </h1>
-        <p className="mt-4 max-w-3xl text-base leading-7 text-slate-300">
+        <p className="mt-3 max-w-2xl text-sm leading-7 text-muted">
           Ten ekran pokazuje przykładowe KPI sprintu: tempo domykania zadań, aktualny rozkład statusów
           i obszary wymagające szybkiej reakcji.
         </p>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <article className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
-          <p className="text-sm font-semibold text-slate-500">Total tasks</p>
-          <p className="mt-2 text-3xl font-bold text-slate-950">{tasks.length}</p>
-        </article>
-        <article className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
-          <p className="text-sm font-semibold text-slate-500">Completion rate</p>
-          <p className="mt-2 text-3xl font-bold text-emerald-700">{completionRate}%</p>
-        </article>
-        <article className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
-          <p className="text-sm font-semibold text-slate-500">Due this week</p>
-          <p className="mt-2 text-3xl font-bold text-indigo-700">{metrics.dueThisWeekCount}</p>
-        </article>
-        <article className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
-          <p className="text-sm font-semibold text-slate-500">High priority active</p>
-          <p className="mt-2 text-3xl font-bold text-rose-700">{metrics.highPriorityActiveCount}</p>
-        </article>
+        {summaryMetrics.map((metric) => (
+          <article key={metric.label} className="retro-panel p-5">
+            <p className="retro-eyebrow">{metric.label}</p>
+            <p className="mt-4 font-display text-4xl text-ink">{metric.value}</p>
+            <p className="mt-3 border-t border-line pt-3 font-mono text-[10px] text-muted">{metric.detail}</p>
+          </article>
+        ))}
       </div>
 
-      <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-200/70">
-        <div className="flex items-center justify-between gap-4">
-          <h2 className="text-lg font-bold text-slate-950">Task status distribution</h2>
-          <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">Mock data</span>
+      <section className="retro-panel p-5 sm:p-6">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-line pb-5">
+          <h2 className="font-display text-2xl text-ink">Task status distribution</h2>
+          <span className="retro-badge">{tasks.length} tasks</span>
         </div>
 
-        <div className="mt-6 space-y-4">
+        <div className="mt-6 space-y-6">
           {statusMetrics.map((metric) => (
             <article key={metric.status} className="space-y-2">
-              <div className="flex items-center justify-between text-sm">
-                <p className="font-semibold text-slate-700">{metric.label}</p>
-                <p className="font-bold text-slate-950">
+              <div className="flex items-center justify-between gap-3 text-sm">
+                <p className="text-ink">{metric.label}</p>
+                <p className="font-mono text-xs text-ink">
                   {metric.count} ({metric.percentage}%)
                 </p>
               </div>
-              <div className="h-2.5 rounded-full bg-slate-100">
+              <div className="h-3.5 overflow-hidden rounded-[2px] border border-ink bg-surface">
                 <div
                   aria-hidden="true"
-                  className={`h-full rounded-full ${metric.toneClassName}`}
+                  className="retro-progress h-full"
                   style={{ width: `${metric.percentage}%` }}
                 />
               </div>

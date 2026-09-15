@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { primaryNavigation } from "@/constants/navigation";
 import { Icon } from "@/components/ui/Icon";
 
 type TopNavbarProps = {
@@ -6,63 +10,39 @@ type TopNavbarProps = {
 };
 
 export function TopNavbar({ onOpenMenu }: TopNavbarProps) {
+  const pathname = usePathname();
+  const currentPage = primaryNavigation.find((item) => item.href === pathname)?.label ?? "Workspace";
+
   return (
-    <header className="sticky top-0 z-30 border-b border-slate-200/80 bg-white/85 backdrop-blur-xl">
-      <div className="flex min-h-20 items-center gap-4 px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-30 border-b border-ink bg-white">
+      <div className="flex min-h-20 items-center gap-3 px-5 sm:gap-5 sm:px-8 lg:px-10">
         <button
           aria-label="Open navigation menu"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:border-slate-300 hover:text-slate-950 lg:hidden"
+          className="retro-button retro-button-secondary h-11 w-11 shrink-0 p-0 lg:hidden"
           type="button"
           onClick={onOpenMenu}
         >
           <Icon name="menu" className="h-5 w-5" />
         </button>
-
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-medium text-slate-500">Welcome back, Alex</p>
-          <h1 className="truncate text-xl font-bold tracking-tight text-slate-950 sm:text-2xl">
-            TaskFlow Dashboard
-          </h1>
+          <p className="font-mono text-[10px] uppercase tracking-wider text-muted">
+            <span className="hidden sm:inline">Workspace / </span>Overview
+          </p>
+          <h1 className="mt-1 truncate text-sm font-bold text-ink">{currentPage}</h1>
         </div>
-
-        <label className="hidden min-w-72 items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-500 shadow-inner xl:flex">
-          <Icon name="search" className="h-4 w-4 text-slate-400" />
-          <span className="sr-only">Search tasks</span>
-          <input
-            className="w-full bg-transparent font-medium text-slate-700 outline-none placeholder:text-slate-400"
-            placeholder="Search tasks, projects..."
-            type="search"
-          />
-        </label>
-
-        <Link
-          className="hidden rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-bold text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:text-slate-950 md:inline-flex"
-          href="/login"
-        >
-          Log in
+        <Link className="hidden items-center gap-2 font-mono text-xs text-muted underline-offset-4 hover:text-ink hover:underline xl:inline-flex" href="/tasks">
+          <Icon name="search" className="h-4 w-4" />
+          Find a task
         </Link>
-
-        <Link
-          className="hidden rounded-2xl bg-slate-950 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-slate-300/70 transition hover:-translate-y-0.5 hover:bg-slate-800 sm:inline-flex"
-          href="/register"
-        >
-          Sign up
-        </Link>
-
-        <button
-          aria-label="Open account menu"
-          className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-2 pr-3 shadow-sm transition hover:border-slate-300"
-          type="button"
-        >
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-100 text-sm font-bold text-indigo-700">
-            AC
+        <Link className="hidden font-mono text-xs font-bold underline-offset-4 hover:underline md:inline-flex" href="/login">Log in</Link>
+        <Link className="retro-button hidden sm:inline-flex" href="/register">Sign up <span aria-hidden="true">↗</span></Link>
+        <div className="flex items-center gap-3 border-l border-line pl-3 sm:pl-5" aria-label="Alex Chen, Product lead">
+          <span className="flex h-10 w-10 items-center justify-center rounded-[3px] border border-ink bg-surface font-mono text-xs font-bold">AC</span>
+          <span className="hidden text-left 2xl:block">
+            <span className="block text-xs font-bold">Alex Chen</span>
+            <span className="block text-[11px] text-muted">Product lead</span>
           </span>
-          <span className="hidden text-left md:block">
-            <span className="block text-sm font-bold text-slate-950">Alex Chen</span>
-            <span className="block text-xs font-medium text-slate-500">Product lead</span>
-          </span>
-          <Icon name="chevronDown" className="hidden h-4 w-4 text-slate-400 md:block" />
-        </button>
+        </div>
       </div>
     </header>
   );

@@ -54,19 +54,19 @@ export function TaskForm({ task, submitLabel, onSubmit, onCancel }: TaskFormProp
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="grid gap-4 md:grid-cols-2">
-        <label className="space-y-2 text-sm font-semibold text-slate-700 md:col-span-2">
+      <div className="grid gap-4 sm:grid-cols-2">
+        <label className="flex flex-col gap-2 font-mono text-xs text-ink sm:col-span-2">
           Task title
           <input
             required
             name="title"
             defaultValue={task?.title}
             placeholder="Write a clear action item"
-            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-900 outline-none transition focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100"
+            className="retro-input block w-full"
           />
         </label>
 
-        <label className="space-y-2 text-sm font-semibold text-slate-700 md:col-span-2">
+        <label className="flex flex-col gap-2 font-mono text-xs text-ink sm:col-span-2">
           Description
           <textarea
             required
@@ -74,16 +74,16 @@ export function TaskForm({ task, submitLabel, onSubmit, onCancel }: TaskFormProp
             defaultValue={task?.description}
             rows={3}
             placeholder="Add enough context for the owner"
-            className="w-full resize-none rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-900 outline-none transition focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100"
+            className="retro-input block w-full resize-y"
           />
         </label>
 
-        <label className="space-y-2 text-sm font-semibold text-slate-700">
+        <label className="flex min-w-0 flex-col gap-2 font-mono text-xs text-ink">
           Status
           <select
             name="status"
             defaultValue={task?.status ?? "todo"}
-            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-bold text-slate-700 outline-none transition focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100"
+            className="retro-input block w-full"
           >
             {TASK_STATUS_OPTIONS.map((status) => (
               <option key={status.value} value={status.value}>
@@ -93,12 +93,12 @@ export function TaskForm({ task, submitLabel, onSubmit, onCancel }: TaskFormProp
           </select>
         </label>
 
-        <label className="space-y-2 text-sm font-semibold text-slate-700">
+        <label className="flex min-w-0 flex-col gap-2 font-mono text-xs text-ink">
           Priority
           <select
             name="priority"
             defaultValue={task?.priority ?? "medium"}
-            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-bold text-slate-700 outline-none transition focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100"
+            className="retro-input block w-full"
           >
             {TASK_PRIORITY_OPTIONS.map((priority) => (
               <option key={priority.value} value={priority.value}>
@@ -108,60 +108,60 @@ export function TaskForm({ task, submitLabel, onSubmit, onCancel }: TaskFormProp
           </select>
         </label>
 
-        <label className="space-y-2 text-sm font-semibold text-slate-700">
+        <label className="flex min-w-0 flex-col gap-2 font-mono text-xs text-ink">
           Project
           <input
             required
             name="project"
             defaultValue={task?.project ?? DEFAULT_PROJECT}
-            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-900 outline-none transition focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100"
+            className="retro-input block w-full"
           />
         </label>
 
-        <label className="space-y-2 text-sm font-semibold text-slate-700">
+        <label className="flex min-w-0 flex-col gap-2 font-mono text-xs text-ink">
           Owner
           <input
             required
             name="assigneeName"
             defaultValue={task?.assignee.name ?? DEFAULT_ASSIGNEE_NAME}
-            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-900 outline-none transition focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100"
+            className="retro-input block w-full"
           />
         </label>
 
-        <label className="space-y-2 text-sm font-semibold text-slate-700">
+        <label className="flex min-w-0 flex-col gap-2 font-mono text-xs text-ink">
           Due date
           <input
             name="dueDate"
             type="date"
             defaultValue={task?.dueDate ?? ""}
-            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-900 outline-none transition focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100"
+            className="retro-input block min-w-0 w-full"
           />
         </label>
 
-        <label className="space-y-2 text-sm font-semibold text-slate-700">
+        <label className="flex min-w-0 flex-col gap-2 font-mono text-xs text-ink">
           Tags
           <input
             name="tags"
             defaultValue={task?.tags.join(", ")}
             placeholder="design, qa, roadmap"
-            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-900 outline-none transition focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100"
+            className="retro-input block w-full"
           />
         </label>
       </div>
 
-      <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+      <div className="flex flex-col-reverse gap-3 border-t border-line pt-4 sm:flex-row sm:justify-end">
         {onCancel ? (
           <button
             type="button"
             onClick={onCancel}
-            className="rounded-2xl border border-slate-200 px-4 py-3 text-sm font-bold text-slate-600 transition hover:bg-slate-50"
+            className="retro-button retro-button-secondary"
           >
             Cancel
           </button>
         ) : null}
         <button
           type="submit"
-          className="rounded-2xl bg-slate-950 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-slate-300 transition hover:-translate-y-0.5 hover:bg-slate-800"
+          className="retro-button"
         >
           {submitLabel}
         </button>

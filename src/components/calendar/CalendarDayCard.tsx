@@ -14,23 +14,24 @@ export function CalendarDayCard({ day }: CalendarDayCardProps) {
   return (
     <article
       aria-label={`${formatCalendarDayLabel(day.date)}: ${day.tasks.length} scheduled tasks`}
-      className={`min-h-36 rounded-2xl border p-3 transition hover:-translate-y-0.5 hover:shadow-md ${
+      className={`min-h-36 min-w-0 rounded-[2px] border p-2 transition-colors ${
         day.isToday
-          ? "border-indigo-300 bg-indigo-50 shadow-sm shadow-indigo-100"
-          : "border-slate-100 bg-slate-50/80"
-      } ${day.isCurrentMonth ? "text-slate-950" : "text-slate-300"}`}
+          ? "border-ink bg-surface"
+          : "border-line bg-white hover:border-ink"
+      } ${day.isCurrentMonth ? "text-ink" : "text-muted"}`}
     >
       <div className="flex items-center justify-between gap-2">
         <span
-          className={`flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold ${
-            day.isToday ? "bg-indigo-600 text-white" : "bg-white text-inherit"
+          aria-current={day.isToday ? "date" : undefined}
+          className={`flex h-7 w-7 items-center justify-center rounded-[2px] font-mono text-xs font-bold ${
+            day.isToday ? "bg-ink text-white" : "text-inherit"
           }`}
         >
           {day.dayOfMonth}
         </span>
-        {day.isWeekend ? (
-          <span className="hidden rounded-full bg-white px-2 py-1 text-[0.65rem] font-bold uppercase text-slate-400 sm:inline-flex">
-            Weekend
+        {day.isToday ? (
+          <span className="font-mono text-[9px] font-bold uppercase tracking-wide text-ink">
+            Today
           </span>
         ) : null}
       </div>
@@ -41,13 +42,13 @@ export function CalendarDayCard({ day }: CalendarDayCardProps) {
             <CalendarTaskPill key={task.id} task={task} />
           ))}
           {hiddenTaskCount > 0 ? (
-            <li className="rounded-xl bg-white px-2.5 py-1.5 text-xs font-bold text-slate-500">
+            <li className="px-1 py-1 font-mono text-[10px] font-bold text-muted">
               +{hiddenTaskCount} more
             </li>
           ) : null}
         </ul>
       ) : (
-        <p className="mt-4 text-xs font-medium text-slate-400">No task due</p>
+        <p className="mt-4 font-mono text-[10px] text-muted">No task due</p>
       )}
     </article>
   );

@@ -12,10 +12,11 @@ type TaskListProps = {
 export function TaskList({ tasks, onDelete, onUpdate, onStatusChange, onResetFilters }: TaskListProps) {
   if (tasks.length === 0) {
     return (
-      <div className="rounded-3xl border border-dashed border-slate-300 bg-white p-10 text-center shadow-sm shadow-slate-200/70">
-        <p className="text-lg font-bold text-slate-950">No tasks match these filters.</p>
-        <p className="mt-2 text-sm text-slate-500">Try a broader search, reset filters, or create a new task.</p>
-        <button type="button" onClick={onResetFilters} className="mt-5 rounded-2xl bg-slate-950 px-5 py-3 text-sm font-bold text-white transition hover:bg-slate-800">
+      <div className="retro-panel p-8 text-center">
+        <p className="retro-eyebrow mb-3">No results</p>
+        <p className="font-display text-2xl text-ink">No tasks match these filters.</p>
+        <p className="mt-2 text-sm leading-6 text-muted">Try a broader search, reset filters, or create a new task.</p>
+        <button type="button" onClick={onResetFilters} className="retro-button mx-auto mt-5">
           Reset filters
         </button>
       </div>

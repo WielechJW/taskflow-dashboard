@@ -14,10 +14,10 @@ export function formatDateLabel(date: string | null): string {
 
 export function getStatusTone(status: TaskStatus): string {
   const tones: Record<TaskStatus, string> = {
-    todo: "bg-slate-100 text-slate-700 ring-slate-200",
-    "in-progress": "bg-blue-50 text-blue-700 ring-blue-200",
-    review: "bg-amber-50 text-amber-700 ring-amber-200",
-    done: "bg-emerald-50 text-emerald-700 ring-emerald-200",
+    todo: "border-ink bg-white text-ink ring-ink",
+    "in-progress": "border-ink bg-surface text-ink ring-ink",
+    review: "border-dashed border-ink bg-white text-ink ring-ink",
+    done: "border-ink bg-ink text-white ring-ink",
   };
 
   return tones[status];
@@ -25,10 +25,10 @@ export function getStatusTone(status: TaskStatus): string {
 
 export function getPriorityTone(priority: TaskPriority): string {
   const tones: Record<TaskPriority, string> = {
-    low: "bg-slate-100 text-slate-600",
-    medium: "bg-indigo-50 text-indigo-700",
-    high: "bg-orange-50 text-orange-700",
-    urgent: "bg-rose-50 text-rose-700",
+    low: "border-line bg-white text-muted",
+    medium: "border-line bg-surface text-ink",
+    high: "border-ink bg-white text-ink font-bold",
+    urgent: "border-ink bg-ink text-white font-bold",
   };
 
   return tones[priority];

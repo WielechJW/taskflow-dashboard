@@ -28,19 +28,20 @@ function NavigationLink({
   return (
     <Link
       aria-current={isActive ? "page" : undefined}
-      className={`group flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-semibold transition ${
+      className={`group flex min-h-11 items-center gap-3 rounded-[3px] border px-3 py-3 text-sm font-semibold transition-colors ${
         isActive
-          ? "bg-slate-950 text-white shadow-lg shadow-slate-200"
-          : "text-slate-600 hover:bg-white hover:text-slate-950 hover:shadow-sm"
+          ? "border-ink bg-ink text-white shadow-[3px_3px_0_#c6c6c6]"
+          : "border-transparent text-muted hover:border-ink hover:bg-surface hover:text-ink"
       }`}
       href={item.href}
       onClick={onNavigate}
     >
       <Icon
         name={item.icon}
-        className={`h-5 w-5 ${isActive ? "text-white" : "text-slate-400 group-hover:text-slate-700"}`}
+        className="h-[18px] w-[18px]"
       />
       {item.label}
+      {isActive && <span aria-hidden="true" className="ml-auto font-mono">↗</span>}
     </Link>
   );
 }
@@ -51,12 +52,13 @@ export function SidebarNavigation({ onNavigate }: SidebarNavigationProps) {
   return (
     <nav aria-label="Primary navigation" className="flex flex-1 flex-col gap-8">
       <div className="space-y-2">
+        <p className="retro-eyebrow mb-3 px-3">The essentials</p>
         {primaryNavigation.map((item) => (
           <NavigationLink key={item.href} item={item} pathname={pathname} onNavigate={onNavigate} />
         ))}
       </div>
 
-      <div className="mt-auto space-y-2 border-t border-slate-200 pt-6">
+      <div className="mt-auto space-y-2 border-t border-line pt-6">
         {secondaryNavigation.map((item) => (
           <NavigationLink key={item.href} item={item} pathname={pathname} onNavigate={onNavigate} />
         ))}

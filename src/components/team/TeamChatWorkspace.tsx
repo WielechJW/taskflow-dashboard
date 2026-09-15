@@ -36,43 +36,43 @@ export function TeamChatWorkspace() {
 
   return (
     <section aria-labelledby="team-chat-title" className="space-y-6">
-      <div className="overflow-hidden rounded-[2rem] bg-slate-950 text-white shadow-2xl shadow-slate-300/70">
-        <div className="grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
+      <div className="border-b-2 border-ink pb-6">
+        <div className="grid gap-6 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
           <div>
-            <p className="text-sm font-bold uppercase tracking-[0.24em] text-indigo-200">Teams</p>
-            <h1 id="team-chat-title" className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
-              Chat with your project team and keep task decisions in one place.
+            <p className="retro-eyebrow">Teams / Stay in the loop</p>
+            <h1 id="team-chat-title" className="retro-title mt-3">
+              Good work starts with a conversation.
             </h1>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-slate-300">
-              Send quick updates, coordinate owners, and keep launch conversations close to the task workspace.
+            <p className="mt-3 max-w-xl text-sm leading-6 text-muted">
+              Share updates, work through ideas, and keep your team on the same page.
             </p>
           </div>
-          <aside className="rounded-3xl border border-white/10 bg-white/10 p-5 backdrop-blur">
-            <p className="text-sm font-semibold text-indigo-100">Team pulse</p>
-            <p className="mt-2 text-2xl font-bold">{onlineMemberCount} online now</p>
-            <p className="mt-3 text-sm leading-6 text-slate-300">
-              Lightweight local chat state is ready for a future real-time backend integration.
+          <aside className="rounded-[3px] border border-ink bg-white p-4">
+            <p className="retro-eyebrow">Team pulse</p>
+            <p className="mt-2 font-display text-xl text-ink">{onlineMemberCount} online now</p>
+            <p className="mt-2 text-xs leading-5 text-muted">
+              Your project crew, one conversation away.
             </p>
           </aside>
         </div>
       </div>
 
-      <div className="grid gap-6 xl:grid-cols-[1fr_20rem]">
-        <section className="flex min-h-[42rem] overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm shadow-slate-200/70">
+      <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_18rem]">
+        <section className="retro-panel flex min-h-[36rem] overflow-hidden">
           <div className="flex min-w-0 flex-1 flex-col">
-            <header className="flex flex-col gap-3 border-b border-slate-200 p-5 sm:flex-row sm:items-center sm:justify-between">
+            <header className="flex flex-col gap-3 border-b border-ink p-5 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <h2 className="text-lg font-bold text-slate-950">Launch room</h2>
-                <p className="mt-1 text-sm text-slate-500">
+                <h2 className="font-display text-2xl text-ink">Launch room</h2>
+                <p className="mt-1 font-mono text-[10px] text-muted">
                   {messages.length} messages · Daily planning channel
                 </p>
               </div>
-              <span className="w-fit rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700">
-                Live locally
+              <span className="retro-badge w-fit">
+                Team channel
               </span>
             </header>
 
-            <ol className="flex-1 space-y-4 overflow-y-auto bg-slate-50 p-4 sm:p-6" aria-label="Team messages">
+            <ol className="flex-1 space-y-5 overflow-y-auto bg-surface p-4 sm:p-6" aria-label="Team messages" aria-live="polite" aria-relevant="additions">
               {messages.map((message) => (
                 <TeamMessageBubble key={message.id} message={message} />
               ))}
@@ -82,10 +82,10 @@ export function TeamChatWorkspace() {
           </div>
         </section>
 
-        <aside className="space-y-4 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
-          <div>
-            <h2 className="text-lg font-bold text-slate-950">Channel members</h2>
-            <p className="mt-1 text-sm text-slate-500">People involved in today&apos;s delivery decisions.</p>
+        <aside className="retro-panel space-y-4 self-start p-5">
+          <div className="border-b border-ink pb-4">
+            <h2 className="font-display text-xl text-ink">The people</h2>
+            <p className="mt-1 text-xs leading-5 text-muted">Your teammates in the launch room.</p>
           </div>
           <ul className="space-y-3">
             {teamMembers.map((member) => (
