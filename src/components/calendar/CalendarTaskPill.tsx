@@ -9,10 +9,10 @@ export function CalendarTaskPill({ task }: CalendarTaskPillProps) {
   return (
     <li>
       <span
-        className={`block truncate rounded-xl px-2.5 py-1.5 text-xs font-bold ${getPriorityTone(
+        className={`block truncate rounded-[2px] border px-1.5 py-1 font-mono text-[10px] font-bold ${getPriorityTone(
           task.priority,
         )}`}
-        title={task.title}
+        title={`${task.title} · ${task.priority} priority`}
       >
         {task.title}
       </span>

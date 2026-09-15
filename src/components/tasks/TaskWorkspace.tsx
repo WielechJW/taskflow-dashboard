@@ -33,46 +33,43 @@ export function TaskWorkspace({ initialTasks }: TaskWorkspaceProps) {
       value: String(metrics.activeTaskCount),
       helper: `${metrics.highPriorityActiveCount} high-priority tasks need attention this week.`,
       icon: "checkCircle",
-      tone: "blue",
     },
     {
       label: "On-time rate",
       value: `${metrics.onTimeRate}%`,
       helper: `${metrics.completedTaskCount} completed items support delivery tracking.`,
       icon: "analytics",
-      tone: "emerald",
     },
     {
       label: "Due this week",
       value: String(metrics.dueThisWeekCount),
-      helper: "Planning, review, and QA tasks update from local task state.",
+      helper: "Keep your upcoming deadlines in view.",
       icon: "calendar",
-      tone: "orange",
     },
   ] as const;
 
   return (
     <section aria-labelledby="task-workspace-title" className="space-y-6">
-      <div className="rounded-[2rem] bg-slate-950 p-6 text-white shadow-2xl shadow-slate-300/70 sm:p-8">
-        <div className="grid gap-6 lg:grid-cols-[1fr_18rem] lg:items-end">
+      <div className="border-b-2 border-ink pb-6">
+        <div className="grid gap-6 lg:grid-cols-[1fr_18rem] lg:items-start">
           <div className="max-w-3xl">
-            <p className="text-sm font-bold uppercase tracking-[0.24em] text-indigo-200">
-              Product workspace
+            <p className="retro-eyebrow">
+              Task workspace
             </p>
-            <h1 id="task-workspace-title" className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
-              Plan, update, and finish team tasks from one focused dashboard.
+            <h1 id="task-workspace-title" className="retro-title mt-3">
+              Your work, in order.
             </h1>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-slate-300">
-              TaskFlow now runs as a fully interactive local workspace: create work, edit details, update statuses, and narrow the list without a database.
+            <p className="mt-3 max-w-xl text-sm leading-6 text-muted">
+              A clear space to plan, keep track, and check things off. One task at a time.
             </p>
           </div>
-          <div className="rounded-3xl border border-white/10 bg-white/10 p-5 backdrop-blur">
-            <p className="text-sm font-bold text-indigo-100">Today&apos;s focus</p>
-            <div className="mt-4 space-y-3">
+          <div className="border-l-2 border-ink pl-5">
+            <p className="retro-eyebrow">Today&apos;s focus</p>
+            <div className="mt-3 divide-y divide-line">
               {focusTasks.map((task) => (
-                <div key={task.id} className="rounded-2xl bg-white/10 p-3">
-                  <p className="truncate text-sm font-bold text-white">{task.title}</p>
-                  <p className="mt-1 text-xs font-semibold uppercase tracking-wide text-slate-300">
+                <div key={task.id} className="py-2 first:pt-0 last:pb-0">
+                  <p className="truncate text-sm font-medium text-ink">{task.title}</p>
+                  <p className="mt-1 font-mono text-[10px] uppercase tracking-wide text-muted">
                     {task.priority} · {formatDateLabel(task.dueDate)}
                   </p>
                 </div>
@@ -88,18 +85,19 @@ export function TaskWorkspace({ initialTasks }: TaskWorkspaceProps) {
         ))}
       </div>
 
-      <div className="grid gap-6 xl:grid-cols-[0.9fr_1.4fr]">
-        <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-200/70 xl:sticky xl:top-24 xl:self-start">
-          <div className="mb-5">
-            <h2 className="text-lg font-bold text-slate-950">Create task</h2>
-            <p className="mt-2 text-sm leading-6 text-slate-500">
-              New tasks are added to local React state and can be edited or deleted immediately.
+      <div className="grid gap-6 xl:grid-cols-[minmax(0,0.9fr)_minmax(0,1.4fr)]">
+        <section className="retro-panel min-w-0 p-5 sm:p-6 xl:sticky xl:top-24 xl:self-start">
+          <div className="mb-5 border-b border-ink pb-4">
+            <p className="retro-eyebrow mb-2">Something to do</p>
+            <h2 className="font-display text-2xl text-ink">Create task</h2>
+            <p className="mt-2 text-sm leading-6 text-muted">
+              Give it a name, an owner, and a little context.
             </p>
           </div>
           <TaskForm submitLabel="Create task" onSubmit={createTask} />
         </section>
 
-        <div className="space-y-5">
+        <div className="min-w-0 space-y-5">
           <TaskFilters
             filters={filters}
             resultCount={filteredTasks.length}
@@ -110,10 +108,10 @@ export function TaskWorkspace({ initialTasks }: TaskWorkspaceProps) {
 
           <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <h2 className="text-xl font-bold text-slate-950">Task list</h2>
-              <p className="text-sm text-slate-500">Search, filter, status-change, edit, or remove local tasks.</p>
+              <h2 className="font-display text-2xl text-ink">Task list</h2>
+              <p className="mt-1 text-sm text-muted">Everything on your list, ready for the next step.</p>
             </div>
-            <span className="rounded-full bg-white px-3 py-1 text-xs font-bold text-slate-500 ring-1 ring-slate-200">
+            <span className="retro-badge w-fit shrink-0">
               {tasks.length} total tasks
             </span>
           </div>

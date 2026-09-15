@@ -6,10 +6,10 @@ type CalendarStatCardProps = {
 
 export function CalendarStatCard({ label, value, helper }: CalendarStatCardProps) {
   return (
-    <article className="rounded-3xl border border-white/70 bg-white/90 p-5 shadow-sm shadow-slate-200/80">
-      <p className="text-sm font-semibold text-slate-500">{label}</p>
-      <p className="mt-3 text-3xl font-bold tracking-tight text-slate-950">{value}</p>
-      <p className="mt-2 text-sm leading-6 text-slate-500">{helper}</p>
+    <article className="retro-panel p-5">
+      <p className="retro-eyebrow">{label}</p>
+      <p className="mt-3 font-display text-4xl text-ink">{value}</p>
+      <p className="mt-2 text-xs leading-5 text-muted">{helper}</p>
     </article>
   );
 }

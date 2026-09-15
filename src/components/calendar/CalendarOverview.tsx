@@ -48,23 +48,22 @@ export function CalendarOverview() {
 
   return (
     <section aria-labelledby="calendar-title" className="space-y-6">
-      <div className="overflow-hidden rounded-[2rem] bg-slate-950 text-white shadow-2xl shadow-slate-300/70">
-        <div className="grid gap-8 p-6 sm:p-8 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
+      <div className="border-b-2 border-ink pb-6">
+        <div className="grid gap-6 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
           <div>
-            <p className="text-sm font-bold uppercase tracking-[0.24em] text-indigo-200">Calendar</p>
-            <h2 id="calendar-title" className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
-              Plan deadlines, owners, and priority work for {monthLabel}.
+            <p className="retro-eyebrow">Calendar / Plan ahead</p>
+            <h2 id="calendar-title" className="retro-title mt-3">
+              Every deadline in its place.
             </h2>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-slate-300">
-              This calendar view turns task due dates into a weekly planning surface for sprint reviews,
-              launch readiness, and daily focus conversations.
+            <p className="mt-3 max-w-xl text-sm leading-6 text-muted">
+              A clear view of your tasks, priorities, and upcoming deadlines for {monthLabel}.
             </p>
           </div>
-          <aside className="rounded-3xl border border-white/10 bg-white/10 p-5 backdrop-blur">
-            <p className="text-sm font-semibold text-indigo-100">Today</p>
-            <p className="mt-2 text-2xl font-bold">{referenceDateLabel}</p>
-            <p className="mt-3 text-sm leading-6 text-slate-300">
-              Prioritize overdue tasks first, then use upcoming cards to confirm next owners.
+          <aside className="rounded-[3px] border border-ink bg-white p-4">
+            <p className="retro-eyebrow">Today</p>
+            <p className="mt-2 font-display text-xl text-ink">{referenceDateLabel}</p>
+            <p className="mt-2 text-xs leading-5 text-muted">
+              Start with overdue tasks, then look at what comes next.
             </p>
           </aside>
         </div>
@@ -76,35 +75,40 @@ export function CalendarOverview() {
         ))}
       </div>
 
-      <div className="grid gap-4 xl:grid-cols-[1fr_22rem]">
-        <section className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm shadow-slate-200/70 sm:p-6">
+      <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_18rem]">
+        <section className="retro-panel min-w-0 p-4 sm:p-5" aria-label={`${monthLabel} calendar`}>
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h3 className="text-lg font-bold text-slate-950">{monthLabel}</h3>
-              <p className="text-sm text-slate-500">Monday-first monthly planning grid.</p>
+              <h3 className="font-display text-2xl text-ink">{monthLabel}</h3>
+              <p className="mt-1 text-xs text-muted">Your month at a glance.</p>
             </div>
-            <span className="rounded-full bg-indigo-50 px-3 py-1 text-xs font-bold text-indigo-700">
+            <span className="retro-badge w-fit">
               {summary.activeTaskCount} active deadlines
             </span>
           </div>
 
-          <div className="mt-6 grid grid-cols-7 gap-2 text-center text-xs font-bold uppercase tracking-wide text-slate-400">
-            {WEEKDAY_LABELS.map((dayLabel) => (
-              <div key={dayLabel}>{dayLabel}</div>
-            ))}
-          </div>
+          <p className="mt-4 font-mono text-[10px] text-muted sm:hidden">Scroll sideways to see the full week →</p>
+          <div className="mt-5 overflow-x-auto pb-2" tabIndex={0} role="region" aria-label="Monthly schedule, scroll horizontally to see all days">
+            <div className="min-w-[580px]">
+              <div className="grid grid-cols-7 gap-1.5 border-b border-ink pb-3 text-center font-mono text-[10px] font-bold uppercase tracking-wider text-muted">
+                {WEEKDAY_LABELS.map((dayLabel) => (
+                  <div key={dayLabel}>{dayLabel}</div>
+                ))}
+              </div>
 
-          <div className="mt-2 grid grid-cols-1 gap-3 sm:grid-cols-7 sm:gap-2">
-            {calendarDays.map((day) => (
-              <CalendarDayCard key={day.date} day={day} />
-            ))}
+              <div className="mt-2 grid grid-cols-7 gap-1.5">
+                {calendarDays.map((day) => (
+                  <CalendarDayCard key={day.date} day={day} />
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
-        <aside className="space-y-4 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm shadow-slate-200/70">
-          <div>
-            <h3 className="text-lg font-bold text-slate-950">Upcoming deadlines</h3>
-            <p className="mt-1 text-sm text-slate-500">Next active tasks sorted by due date and priority.</p>
+        <aside className="retro-panel space-y-4 p-5">
+          <div className="border-b border-ink pb-4">
+            <h3 className="font-display text-xl text-ink">Coming up next</h3>
+            <p className="mt-1 text-xs leading-5 text-muted">Your next tasks, in deadline order.</p>
           </div>
           <div className="space-y-3">
             {upcomingTasks.map((task) => (

@@ -34,28 +34,28 @@ type UpcomingTaskCardProps = {
 
 export function UpcomingTaskCard({ task }: UpcomingTaskCardProps) {
   return (
-    <article className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <h3 className="font-bold text-slate-950">{task.title}</h3>
-          <p className="mt-1 text-sm text-slate-500">{task.project}</p>
+    <article className="rounded-[3px] border border-line bg-white p-4">
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div className="min-w-0 flex-1 basis-32">
+          <h4 className="text-sm font-bold leading-5 text-ink">{task.title}</h4>
+          <p className="mt-1 text-xs text-muted">{task.project}</p>
         </div>
         <span
-          className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-bold ${getPriorityTone(
+          className={`shrink-0 rounded-[2px] border px-2 py-1 font-mono text-[10px] font-bold uppercase ${getPriorityTone(
             task.priority,
           )}`}
         >
           {priorityLabels[task.priority]}
         </span>
       </div>
-      <div className="mt-4 flex flex-wrap items-center gap-2 text-xs font-bold">
-        <span className={`rounded-full px-2.5 py-1 ring-1 ${getStatusTone(task.status)}`}>
+      <div className="mt-4 flex flex-wrap items-center gap-2 font-mono text-[10px] font-bold">
+        <span className={`rounded-[2px] border px-2 py-1 ${getStatusTone(task.status)}`}>
           {statusLabels[task.status]}
         </span>
-        <span className="rounded-full bg-white px-2.5 py-1 text-slate-500 ring-1 ring-slate-200">
+        <span className="text-muted">
           Due {formatDateLabel(task.dueDate)}
         </span>
-        <span className="rounded-full bg-white px-2.5 py-1 text-slate-500 ring-1 ring-slate-200">
+        <span className="ml-auto flex h-6 w-6 items-center justify-center rounded-[2px] border border-ink text-ink" title={task.assignee.name}>
           {task.assignee.avatarInitials}
         </span>
       </div>

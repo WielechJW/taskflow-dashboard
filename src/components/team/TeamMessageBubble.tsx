@@ -8,27 +8,27 @@ export function TeamMessageBubble({ message }: TeamMessageBubbleProps) {
   return (
     <li className={`flex gap-3 ${message.isOwnMessage ? "justify-end" : "justify-start"}`}>
       {!message.isOwnMessage && (
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-slate-200 text-xs font-bold text-slate-700">
+        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[3px] border border-ink bg-white font-mono text-[10px] font-bold text-ink sm:h-10 sm:w-10">
           {message.author.initials}
         </div>
       )}
 
       <article
-        className={`max-w-[85%] rounded-3xl px-4 py-3 shadow-sm sm:max-w-[70%] ${
+        className={`min-w-0 max-w-[85%] rounded-[3px] border border-ink px-4 py-3 sm:max-w-[70%] ${
           message.isOwnMessage
-            ? "rounded-br-md bg-slate-950 text-white shadow-slate-300/70"
-            : "rounded-bl-md border border-slate-200 bg-white text-slate-700 shadow-slate-200/70"
+            ? "bg-ink text-white"
+            : "bg-white text-ink shadow-[2px_2px_0_0_#1c1c1c]"
         }`}
       >
         <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-          <h3 className={`text-sm font-bold ${message.isOwnMessage ? "text-white" : "text-slate-900"}`}>
+          <h3 className="text-xs font-bold">
             {message.author.name}
           </h3>
-          <time className={`text-xs font-semibold ${message.isOwnMessage ? "text-slate-300" : "text-slate-400"}`}>
+          <time className={`font-mono text-[10px] ${message.isOwnMessage ? "text-white/70" : "text-muted"}`}>
             {message.sentAt}
           </time>
         </div>
-        <p className="mt-2 text-sm leading-6">{message.content}</p>
+        <p className="mt-2 break-words text-sm leading-6">{message.content}</p>
       </article>
     </li>
   );

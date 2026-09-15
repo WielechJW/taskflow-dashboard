@@ -12,6 +12,7 @@ A responsive SaaS-style task management interface built with Next.js, React, and
 - Team workspace with a local chat interaction and presence cards
 - Responsive application shell with desktop sidebar and mobile drawer
 - Shared authentication layouts for login and registration screens
+- Monochrome retro styling with shared typography, borders, and controls
 - Static pages generated with the Next.js App Router
 
 ## Tech stack
@@ -47,6 +48,15 @@ src/
 ```
 
 The feature-based component structure keeps presentation separate from task state and data helpers. `useTaskManager` owns local task operations, while utilities handle filtering and derived metrics without coupling them to the UI.
+
+## Design system
+
+The interface uses a white-first, monochrome retro style: black outlines, small corner radii, hard offset shadows, and subtle dotted or hatched patterns. Shared styles live in [`src/app/globals.css`](src/app/globals.css).
+
+- **Colors:** `ink` (`#1c1c1c`) for text and outlines, `muted` (`#626262`) for secondary text, `surface` (`#f5f5f3`) for backgrounds, and `line` (`#d6d6d2`) for subtle dividers.
+- **Typography:** native font stacks use Arial/Helvetica for body text, Georgia for headings, and Courier New for labels and metadata. No external fonts are downloaded.
+- **Shared classes:** `retro-panel`, `retro-button` (with optional `retro-button-secondary`), `retro-input`, `retro-badge`, `retro-eyebrow`, and `retro-title` keep controls and typography consistent. `retro-progress`, `retro-pattern`, and `retro-window-rule` provide decorative patterns.
+- **Responsive behavior:** grids collapse on smaller screens, navigation becomes a mobile drawer, and authentication panels stack vertically. Primary buttons and shared inputs have a 44px minimum height; keyboard focus is visible and reduced-motion preferences are respected.
 
 ## Run locally
 
